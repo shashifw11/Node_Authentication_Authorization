@@ -5,8 +5,9 @@ const jwt = require("jsonwebtoken");
 const newToken = (user) => {
   //this will create a token which will be just a string a cheractors , when will you decript this it will give you user back
   return jwt.sign(
-    { user: user , exp : 60*5},  
-    process.env.JWT_SECRET_KEY
+    { user: user},  
+    process.env.JWT_SECRET_KEY,
+    {expiresIn: 60*60}  // 60*60 is one hour
     // {algorithm: "RS256",  };// RS256 is an algrothim which use to Encrypt the tocken
     // how iam trying to get the details for one perticular user now i will ever be able to get the details of one perticular user.
     // frontend some how to tell me which user is trying to get the information right now
