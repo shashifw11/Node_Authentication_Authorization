@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const verifyToken = (token) => { // create a function that return a promise which gives us reject or resolve
-  console.log("token", token); // here i am reciving token here
+ // console.log("token", token); // here i am reciving token here
   return new Promise((resolve, reject) => {
     const secret = process.env.JWT_SECRET_KEY;
     if (!secret) {
@@ -13,7 +13,7 @@ const verifyToken = (token) => { // create a function that return a promise whic
       if (err) {
         return reject(err);
       } else {
-        resolve(decoded); // decoded is the user object
+        resolve(decoded); // decoded is the user object decoded == user
       }
     });
   });
@@ -46,14 +46,33 @@ const authenticate = async (req, res, next) => {
 
   try {
     const user = await verifyToken(token); // while createing the token we use newToken but here we create the verifyToken for verifying the token.
-    req.user = user.user;
-    console.log("user",req.user);
-    next();
+    req.user = user.user; 
+   // console.log("user",req.user);
+    next(); // moveon to the next middleware or (req,res)=>
   } catch (err) {
     return res.status(401).send({ message: "Token is not valied" }); // when the token expire backend return 401 error and the frontend has a check is it ever recivs 401 then the user return back to the login page
   }
 };
 
 module.exports = authenticate;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

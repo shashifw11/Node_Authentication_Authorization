@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    roles: [{ type: String, required: true }],
   },
   {
     versionKey: false,
@@ -32,7 +33,8 @@ userSchema.pre("save", function (next) {
   }
 });
 
-userSchema.methods.checkPassword = function (password) { // we put this check password function on the user prototype.
+userSchema.methods.checkPassword = function (password) {
+  // we put this check password function on the user prototype.
   const match = bcrypt.compareSync(password, this.password);
   return match;
 };

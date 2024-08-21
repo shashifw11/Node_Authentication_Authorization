@@ -3,6 +3,7 @@ const Product = require("../models/product.model");
 const router = express.Router();
 const { uploadMultiple, uploadSingle } = require("../middleware/upload");
 const authenticate = require("../middleware/authenticate");
+const authorise = require("../middleware/authorise") ;
 
 router.post(
   "/single",
@@ -13,7 +14,12 @@ router.post(
   // for creating the you need to seller means have right to create product.
   // so for creating the product your are must be loged in.
   // once you logedin you are getting the authorization token inside request headers.
-
+  authorise(["seller","admin"]), // seller and admin are alow to create the product.
+  // for authentication we just only to check that user is logedin but in amazon or any ecommerce product for creating the product you have to either admin or seller 
+  // so we would now need along with authentication we also need to know the roles and prevliges of users. so that is called as autherization.
+  // so we need to check the users is autherised to do what ever he wants to do. he have the autherisation or not.
+  // 
+  // 
   uploadSingle("image_urls"),
   async (req, res) => {
     try {
