@@ -20,7 +20,7 @@ const newToken = (user) => {
 // one statefull => we create a session on server // your server after send a response knows that this user are existed in the system. and it has the session save and for every session there is the cokkies on the browser.
 // when we recive cookies in the request we already have the session on server with the cokkies and that is how we know who the user is , without needing any token or any thing . automatically we are able fetch the user from the session ,rather are we are fetching user from the token  we are fethcing from the session.
 
-// two stateless => what we learn today it is stateless where there is nothing stored on the server. when the request comes in we get the token we take the token and get the user out of it, after the request is send it is sent we dont even remember that who the user was. the server has no momery after the request is sent.
+// two stateless => what we learn today it is stateless where there is nothing stored on the server. when the request comes in we get the token we take the token and get the user out of it, after the request is send it is sent we dont even remember that who the user was. the server has no momery after the response is sent.
 
 
 const register = async (req, res) => {
@@ -92,6 +92,7 @@ module.exports = { register, login };
 
 // when you incrypt the user you can get the token . // fronm frontend wehn we send the user details tha we encrypt it and create the token. and send it to frontend user and token, . token is unique for all user accordingly.
 // when you bcrypt the token you can get the user. // when the frontend send the token then we return the user to frontend
+
 
 
 

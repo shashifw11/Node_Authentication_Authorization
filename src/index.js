@@ -1,6 +1,7 @@
 const express = require("express");
 const { register,login } = require("./controllers/auth.controller");
 const app = express();
+const productController = require("./controllers/product.controller")
 
 //app.use("/users", useController)
 // initially i wrote app.use("/users", userController) and than after it goes inside the userCOntroller
@@ -10,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.post("/register", register); 
 app.post("/login", login); 
+app.use("/products" , productController);
 // for writing routes directily like as /register we can not write app.use , and we write app.post so inside the controller no need to find method post and another name for routes. inside the useController only register function is writen
 
 module.exports = app;
